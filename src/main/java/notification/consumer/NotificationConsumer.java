@@ -16,7 +16,7 @@ public class NotificationConsumer {
 	private final EmailService emailService;
 
 	@RabbitListener(queues = RabbitMqConfig.NOTIFICATION_QUEUE)
-	public void processNotification(NotificarCommand command) {
+	public void processNotification(NotificarCommand command)  {
 		emailService.enviarEmailSimples(command);
 
 		log.info("Lembrete de Consulta enviado com sucesso!");

@@ -8,7 +8,6 @@ public class HospitechNotificationServiceApplication {
 
 	public static void main(String[] args) {
 
-
 		SpringApplication.run(HospitechNotificationServiceApplication.class, args);
 	}
 

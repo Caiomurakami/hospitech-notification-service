@@ -2,7 +2,6 @@ package notification.service;
 
 import jakarta.mail.internet.MimeMessage;
 import notification.command.NotificarCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 @Service
 public class EmailService {
 
-	@Autowired
 	private JavaMailSender mailSender;
 
 	public void enviarEmailSimples(NotificarCommand cmd) {
@@ -24,13 +22,15 @@ public class EmailService {
 			helper.setTo(cmd.pacienteEmail());
 			helper.setSubject("Confirmação de Consulta - Rede Hospitech");
 
-			String conteudoHtml = criarTemplateConfirmacaoConsulta(cmd.pacienteNome(),
-					cmd.especialidadeConsulta(), cmd.medicoNome(), cmd.dataConsulta());
+			String conteudoHtml = criarTemplateConfirmacaoConsulta(cmd.pacienteNome(), cmd.especialidadeConsulta(),
+					cmd.medicoNome(), cmd.dataConsulta());
 			helper.setText(conteudoHtml, true);
 
 			mailSender.send(mensagem);
-		} catch (jakarta.mail.MessagingException e) {
-			throw new RuntimeException("Erro ao enviar email de confirmação", e);
+		}
+		catch (Exception e){
+			System.out.println("Erro ao enviar email: " + e.getMessage());
+
 		}
 
 	}
