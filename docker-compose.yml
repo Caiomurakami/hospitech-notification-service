@@ -13,7 +13,7 @@ services:
     networks:
       - springboot-rabbitmq-network
  
-
+-----
 
   rabbitmq:
     image: rabbitmq:3.9-management
